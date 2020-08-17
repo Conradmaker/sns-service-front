@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { FaReact } from "react-icons/fa";
 import Logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
 

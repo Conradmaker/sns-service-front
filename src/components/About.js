@@ -1,5 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import CommentForm from "./CommentForm";
+import CommentList from "./CommentList";
+const MainPost = styled.div`
+  font-size: 18px;
+  padding: 20px;
+  flex: 1;
+`;
 const UserInfo = styled.div`
   span {
     font-size: 25px;
@@ -41,6 +48,8 @@ const AboutCard = styled.div`
   border-radius: 5px;
   box-shadow: 0 1px 5px #90caf9;
   color: #283593;
+  display: flex;
+  flex-direction: column;
 `;
 
 const AboutContainer = styled.div`
@@ -63,6 +72,9 @@ export default function About() {
             <button>UnFollow</button>
           </UserInfo>
         </Summary>
+        <MainPost>가나다라마바사</MainPost>
+        <CommentForm />
+        <CommentList />
       </AboutCard>
     </AboutContainer>
   );

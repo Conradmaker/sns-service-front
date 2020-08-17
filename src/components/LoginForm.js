@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useSelector, useDispatch } from "react-redux";
+import { logIn } from "../modules/user";
 
 export const FormGroup = styled.div`
   display: flex;
@@ -66,6 +68,7 @@ const Form = styled.form`
 `;
 
 export default function LoginForm() {
+  const dispatch = useDispatch();
   const initialState = { email: "", password: "" };
   const [inputs, setInputs] = useState(initialState);
   const { email, password } = inputs;
@@ -76,9 +79,13 @@ export default function LoginForm() {
       [name]: value,
     });
   };
+  const onSubmit = (e) => {
+    e.preventDefault();
+    dispatch(logIn(inputs));
+  };
 
   return (
-    <Form>
+    <Form onSubmit={onSubmit}>
       <h1>Log In</h1>
       <FormGroup>
         <label htmlFor="email">이메일</label>

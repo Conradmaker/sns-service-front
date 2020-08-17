@@ -3,6 +3,8 @@ import styled, { keyframes } from "styled-components";
 import BannerImg from "../assets/banner.jpg";
 import LoginForm from "./LoginForm";
 import SigninForm from "./SigninForm";
+import { useSelector, useDispatch } from "react-redux";
+import { logOut } from "../modules/user";
 
 const LoginPositioner = styled.div`
   position: absolute;
@@ -80,6 +82,8 @@ const PostAddBtn = styled.div`
   z-index: 20;
 `;
 export default function Start() {
+  const { logInDone } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   const [signOpen, setSignOpen] = useState(false);
   const [logOpen, setLogOpen] = useState(false);
   const changeLogin = () => {
@@ -90,15 +94,26 @@ export default function Start() {
     setLogOpen(false);
     setSignOpen(!signOpen);
   };
+  const onlogOut = () => {
+    dispatch(logOut());
+  };
   return (
     <>
       <Banner>
         <LoginPositioner>
-          {logOpen && <LoginForm />}
-          {signOpen && <SigninForm />}
+          {!logInDone && logOpen && <LoginForm />}
+          {!logInDone && signOpen && <SigninForm />}
         </LoginPositioner>
-        <LogBtn onClick={changeLogin}>로그인</LogBtn>
-        <SignBtn onClick={changeSignin}>회원가입</SignBtn>
+        {!logInDone ? (
+          <LogBtn onClick={changeLogin}>로그인</LogBtn>
+        ) : (
+          <LogBtn onClick={changeLogin}>프로필</LogBtn>
+        )}
+        {!logInDone ? (
+          <SignBtn onClick={changeSignin}>회원가입</SignBtn>
+        ) : (
+          <SignBtn onClick={onlogOut}>로그아웃</SignBtn>
+        )}
         <span>- Go Down -</span>
       </Banner>
       <PostAddBtn>Post</PostAddBtn>

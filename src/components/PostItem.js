@@ -44,6 +44,7 @@ export default function PostItem() {
         폐기되지 아니한다. 다만, 국회의원의 임기가 만료된 때에는 그러하지
       </p>
       <p class="read-more">
+        {/* eslint-disable-next-line */}
         <a href="#">Read More</a>
       </p>
     </Card>
